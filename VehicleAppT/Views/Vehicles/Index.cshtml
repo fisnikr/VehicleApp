@@ -1,0 +1,95 @@
+﻿@model IEnumerable<VehicleAppT.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Vehicle-Registration";
+}
+
+<style>
+    .table {
+        width: 100%;
+        border: 1px solid gray;
+    }
+
+        .table td {
+            padding: 2px;
+        }
+
+
+    .table-row-1 td, .table-row-1 th {
+        background: lightgray;
+        border: 0 solid lightgray;
+    }
+
+    .table-row-2 td, .table-row-2 th, thead {
+        background: white;
+        border: 0 solid white;
+    }
+
+    .tableHeaderRow {
+        font-weight: bold;
+        border: 1px solid lightgray;
+    }
+
+    .column1 {
+        width: 15%;
+    }
+
+    .column2 {
+        width: 15%;
+    }
+</style>
+
+<style>
+    /* suppress link for printing */
+    @@media only print {
+        a {
+            display: none;
+        }
+    }
+</style>
+
+
+<h1>Vehicle Registration</h1>
+
+<p>
+    <a asp-action="Create">Register New  Vehicle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.LicensePNr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VinMark)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["modelSort"]">@Html.DisplayNameFor(model => model.VModel.Model)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VinMark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VModel.Model)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="#" onclick="window.print(); return false;">Print</a>
